@@ -3,8 +3,8 @@ import navigation from './navigation.css';
 
 const Navigation = () => {
     return (
-        <div className='navbar'>
-            <p className='f3 link dim underline'>Sign Out</p>
+        <div className='navbar mr2'>
+            <p className='f3 link dim underline cursor'>Sign Out</p>
         </div>
     )
 }
