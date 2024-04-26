@@ -3,14 +3,14 @@ import './imageProcessingField.css';
 
 const imageProcessingField = () => {
     return (
-        <div className="imageInputContainer pa3 shadow-5">
-                    <p className="textPrompt">{"Share your image link for correct recognition. Try it out"}  </p>
-                <div className="inputField" >
-                    <div className="pa1">
-                        <input className="mr0"  style={{width: '70%'}} type="text"/>
-                        <button className="detectBtn pa1" style={{width: '30%'}} type="submit">Detect</button>
-                    </div>
+        <div>
+            <p className="textPrompt f4">{"Share your image link for correct recognition. Try it out"}  </p>
+            <div className="inputField center br3 shadow-5" >
+                <div className="center pa4">
+                    <input className="mr0 pa2 w-70% f3" type="text"/>
+                    <button className="detectBtn pa4 w-30 f3 link grow ph3 pv2 dib white" type="submit">Detect</button>
                 </div>
+            </div>
         </div>
     )
 }

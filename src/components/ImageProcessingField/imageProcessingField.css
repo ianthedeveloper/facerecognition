@@ -1,10 +1,5 @@
-.imageInputContainer {
-    width: 803px;
-    position: absolute;
-    transform: translate(-50%, -50%);
-    top: 42%;
-    left: 50%;
-    border-radius: 7px;
+.inputField {
+    width: 703px;
 
     background:
         linear-gradient(27deg, #151515 5px, transparent 5px) 0 5px,
@@ -15,25 +10,9 @@
         linear-gradient(#1d1d1d 25%, #1a1a1a 25%, #1a1a1a 50%, transparent 50%, transparent 75%, #242424 75%, #242424);
         background-color: #131313;
         background-size: 20px 20px;
-
-    box-shadow: 3px 3px 3px #000;
-}
-
-.inputField {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.textPrompt {
-    font-size: 20px;
-    color: #FFFFFF;
 }
 
 .detectBtn {
     background-color: #C850C0;
-    color: #FFFFFF;
-    font-weight: 600;
     border: none;
-
 }
