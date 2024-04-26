@@ -1,0 +1,15 @@
+@import url('https://fonts.googleapis.com/css2?family=Jersey+10&family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&display=swap');
+
+.navbar {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 0;
+    margin-right: 7px;
+}
+
+p{
+  font-family: "Roboto Condensed", sans-serif;
+  font-weight: 600;
+  font-size: 23px;
+  cursor: pointer;
+}
