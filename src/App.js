@@ -3,6 +3,7 @@ import './App.css';
 import Navigation from './components/Navigation/Navigation';
 import Logo from './components/Logo/Logo';
 import Rank from './components/Rank/Rank';
+import ImageProcessingField from './components/ImageProcessingField/ImageProcessingField';
 
 
 class App extends Component {
@@ -12,6 +13,7 @@ class App extends Component {
         <Navigation/>
         <Logo/>
         <Rank/>
+        <ImageProcessingField/>
       </div>
     );
   }
