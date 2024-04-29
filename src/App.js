@@ -92,7 +92,7 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <ParticlesBg className="particlesBg" num={331} type="fountain" bg={true} />
+        <ParticlesBg className="particlesBg" num={331} type="tadpole" bg={true} />
         <Navigation/>
         <Logo/>
         <Rank/>
