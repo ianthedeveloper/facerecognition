@@ -4,7 +4,7 @@ import './imageProcessingField.css';
 const imageProcessingField = () => {
     return (
         <div>
-            <p className="textPrompt f4">{"Share your image link for correct recognition. Try it out"}  </p>
+            <p className="textPrompt f4">{"Magic: I'll detect the faces in your pictures. Give me a try"}  </p>
             <div className="inputField center br3 shadow-5" >
                 <div className="center pa4">
                     <input className="mr0 pa2 w-70% f3" type="text"/>
