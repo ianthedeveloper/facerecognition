@@ -20,7 +20,7 @@ class App extends Component {
     console.log(event.target.value);
   }
 
-  onButtonClick = (event) => {
+  onButtonSubmit = (event) => {
     console.log("Click");
   }
 
@@ -33,7 +33,7 @@ class App extends Component {
         <Logo/>
         <Rank/>
         <ImageProcessingField 
-          onInputChange={this.onInputChange} onButtonClick={this.onButtonClick}  
+          onInputChange={this.onInputChange} onButtonClick={this.onButtonSubmit}  
         />
         <Facerecognition/>
       </div>

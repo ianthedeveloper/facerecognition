@@ -2,7 +2,7 @@ import React from "react";
 import './imageProcessingField.css';
 
 const imageProcessingField = (props) => {
-    const {onInputChange, onButtonClick} = props;
+    const {onInputChange, onButtonSubmit} = props;
 
     return (
         <div>
@@ -16,7 +16,7 @@ const imageProcessingField = (props) => {
                     <button 
                         className="detectBtn pa4 w-30 f3 link grow ph3 pv2 dib white" 
                         type="submit"
-                        onClick={onButtonClick}>
+                        onClick={onButtonSubmit}>
                         Detect
                     </button>
                 </div>
