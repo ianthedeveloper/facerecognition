@@ -60,7 +60,7 @@ class App extends Component {
   onButtonSubmit = (event) => {
     console.log("Click");
 
-    fetch("https://api.clarifai.com/v2/models/" + MODEL_ID + "/outputs", returnClarifaiRequestOptions)
+    fetch("https://api.clarifai.com/v2/models/" + MODEL_ID + "/outputs", returnClarifaiRequestOptions(this.state.input))
     .then(response => response.json())
     .then(result => {
 
