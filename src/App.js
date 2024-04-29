@@ -5,6 +5,7 @@ import Navigation from './components/Navigation/Navigation';
 import Logo from './components/Logo/Logo';
 import Rank from './components/Rank/Rank';
 import ImageProcessingField from './components/ImageProcessingField/ImageProcessingField';
+import Facerecognition from './components/Facerecognition/Facerecognition';
 
 
 class App extends Component {
@@ -16,6 +17,7 @@ class App extends Component {
         <Logo/>
         <Rank/>
         <ImageProcessingField/>
+        <Facerecognition/>
       </div>
     );
   }
