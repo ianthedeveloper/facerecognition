@@ -57,17 +57,21 @@ class App extends Component {
   }
 
   onInputChange = (event) => {
-    // console.log(event.target.value);
+    console.log(event.target.value);
     this.setState({input: event.target.value});
   }
 
   onButtonSubmit = (event) => {
-    // console.log("Click");
+    console.log("Click");
     this.setState({imageUrl: this.state.input})
 
     fetch("https://api.clarifai.com/v2/models/" + 'face-detection' + "/outputs", returnClarifaiRequestOptions(this.state.input))
-    .then(response => response.json())
+    .then(response => {
+      response.json()
+      console.log(response);
+    })
     .then(result => {
+        console.log(result);
 
         const regions = result.outputs[0].data.regions;
 
@@ -88,7 +92,6 @@ class App extends Component {
                 
             });
         });
-
     })
     .catch(error => console.log('error', error));
   }
@@ -97,12 +100,12 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <ParticlesBg className="particlesBg" num={331} type="cobweb" bg={true} />
+        <ParticlesBg className="particlesBg" num={331} type="fountain" bg={true} />
         <Navigation/>
         <Logo/>
         <Rank/>
         <ImageProcessingField 
-          onInputChange={this.onInputChange} onButtonClick={this.onButtonSubmit}  
+          onInputChange={this.onInputChange} onButtonSubmit={this.onButtonSubmit}  
         />
         <Facerecognition imageUrl={this.state.imageUrl}  />
       </div>
