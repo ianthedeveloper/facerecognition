@@ -6,10 +6,12 @@ import Logo from './components/Logo/Logo';
 import Rank from './components/Rank/Rank';
 import ImageProcessingField from './components/ImageProcessingField/ImageProcessingField';
 import Facerecognition from './components/Facerecognition/Facerecognition';
+import { jsx } from 'react/jsx-runtime';
 
 
 const returnClarifaiRequestOptions = (imageUrl) => {
   const PAT = '70d2b99eec204856bc2886b35b22b05d';
+  // const PAT = '86a7c1fb3a564cef9792728daeaae130';
   const USER_ID = 'ianthedeveloper';
   const APP_ID = 'my-first-application';
   const MODEL_ID = 'face-detection';
@@ -49,18 +51,21 @@ class App extends Component {
   constructor(){
     super();
     this.state = {
-        input: ''
+        input: '',
+        imageUrl: ''
     }
   }
 
   onInputChange = (event) => {
-    console.log(event.target.value);
+    // console.log(event.target.value);
+    this.setState({input: event.target.value});
   }
 
   onButtonSubmit = (event) => {
-    console.log("Click");
+    // console.log("Click");
+    this.setState({imageUrl: this.state.input})
 
-    fetch("https://api.clarifai.com/v2/models/" + MODEL_ID + "/outputs", returnClarifaiRequestOptions(this.state.input))
+    fetch("https://api.clarifai.com/v2/models/" + 'face-detection' + "/outputs", returnClarifaiRequestOptions(this.state.input))
     .then(response => response.json())
     .then(result => {
 
@@ -99,7 +104,7 @@ class App extends Component {
         <ImageProcessingField 
           onInputChange={this.onInputChange} onButtonClick={this.onButtonSubmit}  
         />
-        <Facerecognition/>
+        <Facerecognition imageUrl={this.state.imageUrl}  />
       </div>
     );
   }
