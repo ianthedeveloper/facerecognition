@@ -5,7 +5,9 @@ const Facerecognition = (props) => {
 
     return (
         <div className='center mt3'>
-            <img src={imageUrl} alt=''/>
+            <div className='absolute'>
+                <img src={imageUrl} alt='' style={{width: '500px', height: 'auto'}}  />
+            </div>  
         </div>
     )
 }

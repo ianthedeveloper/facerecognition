@@ -71,8 +71,6 @@ class App extends Component {
       console.log(response);
     })
     .then(result => {
-        console.log(result);
-
         const regions = result.outputs[0].data.regions;
 
         regions.forEach(region => {
