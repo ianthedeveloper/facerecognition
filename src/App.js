@@ -30,18 +30,18 @@ const returnClarifaiRequestOptions = (imageUrl) => {
             }
         }
     ]
-});
+  });
 
-const requestOptions = {
+  const requestOptions = {
   method: 'POST',
   headers: {
-      'Accept': 'application/json',
-      'Authorization': 'Key ' + PAT
-  },
-  body: raw
-};
+        'Accept': 'application/json',
+        'Authorization': 'Key ' + PAT
+    },
+    body: raw
+  };
 
-  return requestOptions;
+    return requestOptions;
 
 }
 
@@ -49,7 +49,7 @@ class App extends Component {
   constructor(){
     super();
     this.state = {
-      input: ''
+        input: ''
     }
   }
 
