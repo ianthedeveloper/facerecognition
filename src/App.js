@@ -43,7 +43,7 @@ const returnClarifaiRequestOptions = (imageUrl) => {
     body: raw
   };
 
-    return requestOptions;
+  return requestOptions;
 
 }
 
@@ -66,33 +66,41 @@ class App extends Component {
     this.setState({imageUrl: this.state.input})
 
     fetch("https://api.clarifai.com/v2/models/" + 'face-detection' + "/outputs", returnClarifaiRequestOptions(this.state.input))
-    .then(response => {
-      response.json()
-      console.log(response);
-    })
-    .then(result => {
-        const regions = result.outputs[0].data.regions;
+        .then(response => {
+          response.json()
+          console.log("Response", response)
+        })
+        .then(result => console.log("Result", result))
+        .catch(error => console.log('Ooops! There was an error', error));
 
-        regions.forEach(region => {
-            // Accessing and rounding the bounding box values
-            const boundingBox = region.region_info.bounding_box;
-            const topRow = boundingBox.top_row.toFixed(3);
-            const leftCol = boundingBox.left_col.toFixed(3);
-            const bottomRow = boundingBox.bottom_row.toFixed(3);
-            const rightCol = boundingBox.right_col.toFixed(3);
+    // fetch("https://api.clarifai.com/v2/models/" + 'MODEL-ID' + "/outputs", returnClarifaiRequestOptions(this.state.input))
+    // .then(response => {
+    //   response.json()
+    //   console.log(response);
+    // })
+    // .then(result => {
+    //     const regions = result.outputs[0].data.regions;
 
-            region.data.concepts.forEach(concept => {
-                // Accessing and rounding the concept value
-                const name = concept.name;
-                const value = concept.value.toFixed(4);
+    //     regions.forEach(region => {
+    //         // Accessing and rounding the bounding box values
+    //         const boundingBox = region.region_info.bounding_box;
+    //         const topRow = boundingBox.top_row.toFixed(3);
+    //         const leftCol = boundingBox.left_col.toFixed(3);
+    //         const bottomRow = boundingBox.bottom_row.toFixed(3);
+    //         const rightCol = boundingBox.right_col.toFixed(3);
 
-                console.log(`${name}: ${value} BBox: ${topRow}, ${leftCol}, ${bottomRow}, ${rightCol}`);
+    //         region.data.concepts.forEach(concept => {
+    //             // Accessing and rounding the concept value
+    //             const name = concept.name;
+    //             const value = concept.value.toFixed(4);
+
+    //             console.log(`${name}: ${value} BBox: ${topRow}, ${leftCol}, ${bottomRow}, ${rightCol}`);
                 
-            });
-        });
-        console.log(result);
-    })
-    .catch(error => console.log('Ooops! There was an error', error));
+    //         });
+    //     });
+    //     console.log(result);
+    // })
+    // .catch(error => console.log('Ooops! There was an error', error));
   }
 
 
