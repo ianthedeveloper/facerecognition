@@ -91,7 +91,7 @@ class App extends Component {
             });
         });
     })
-    .catch(error => console.log('error', error));
+    .catch(error => console.log('Ooops! There was an error', error));
   }
 
 
