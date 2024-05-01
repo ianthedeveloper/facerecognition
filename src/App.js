@@ -66,7 +66,7 @@ class App extends Component {
     console.log("Click");
     this.setState({imageUrl: this.state.input})
 
-    fetch("https://api.clarifai.com/v2/models/" + 'face-detection' + "/outputs", returnClarifaiRequestOptions(this.state.input))
+    fetch("https://api.clarifai.com/v2/models/" + MODEL_ID + "/outputs", returnClarifaiRequestOptions(this.state.input))
     .then(response => {
       response.json()
       console.log(response);
@@ -120,7 +120,6 @@ class App extends Component {
           console.log('Invalid response structure'); // Handle invalid response
       }
     })
-    .catch(error => console.log('Ooops! There was an error', error));
   }
 
 
