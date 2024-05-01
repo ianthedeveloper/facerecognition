@@ -9,125 +9,95 @@ import ImageProcessingField from './components/ImageProcessingField/ImageProcess
 import Facerecognition from './components/Facerecognition/Facerecognition';
 
 
-// const returnClarifaiRequestOptions = (imageUrl) => {
-//   // const PAT = '70d2b99eec204856bc2886b35b22b05d';
-//   const PAT = '86a7c1fb3a564cef9792728daeaae130';
-//   const USER_ID = 'ianthedeveloper';
-//   const APP_ID = 'my-first-application';
-//   const IMAGE_URL = imageUrl;
+// METHOD 1
+// Latest method::
+
+const returnClarifaiRequestOptions = (imageUrl) => {
+  const PAT = '86a7c1fb3a564cef9792728daeaae130';
+  const USER_ID = 'ianthedeveloper';
+  const APP_ID = 'my-first-application';
+  const IMAGE_URL = imageUrl;
   
-//   const raw = JSON.stringify({
-//     "user_app_id": {
-//         "user_id": USER_ID,
-//         "app_id": APP_ID
-//     },
-//     "inputs": [
-//         {
-//             "data": {
-//                 "image": {
-//                     "url": IMAGE_URL
-//                     // "base64": IMAGE_BYTES_STRING
-//                 }
-//             }
-//         }
-//     ]
-//   });
+  const raw = JSON.stringify({
+    "user_app_id": {
+        "user_id": USER_ID,
+        "app_id": APP_ID
+    },
+    "inputs": [
+        {
+            "data": {
+                "image": {
+                    "url": IMAGE_URL
+                    // "base64": IMAGE_BYTES_STRING
+                }
+            }
+        }
+    ]
+  });
 
-//   const requestOptions = {
-//   method: 'POST',
-//   headers: {
-//         'Accept': 'application/json',
-//         'Authorization': 'Key ' + PAT
-//     },
-//     body: raw
-//   };
+  const requestOptions = {
+  method: 'POST',
+  headers: {
+        'Accept': 'application/json',
+        'Authorization': 'Key ' + PAT
+    },
+    body: raw
+  };
 
-//   return requestOptions;
+  return requestOptions;
 
-// }
-
-const app = new Clarifai.App({
-  apiKey: 'b99b35c39d5a491d956f588c06afd1a0'
- });
- 
+}
 
 class App extends Component {
   constructor(){
     super();
     this.state = {
         input: '',
-        imageUrl: '',
-        user: '',
-        displayFaceBox: '',
-        calculateFaceLocation: ''
+        imageUrl: ''
     }
   }
 
   onInputChange = (event) => {
-    console.log(event.target.value);
+    console.log("Input:", event.target.value);
     this.setState({input: event.target.value});
   }
-  
-  onButtonSubmit = (event) => {
-    // const MODEL_ID = 'face-detection';
-    // const MODEL_VERSION_ID = '6dc7e46bc9124c5c8824be4822abe105';
+
+  onButtonSubmit = () => {
+    const MODEL_ID = 'face-detection';
+    const MODEL_VERSION_ID = '6dc7e46bc9124c5c8824be4822abe105';
 
     this.setState({imageUrl: this.state.input});
 
-    // fetch("https://api.clarifai.com/v2/models/" + MODEL_ID +  "/versions/" + MODEL_VERSION_ID + "/outputs", returnClarifaiRequestOptions(this.state.input))
-    // .then(response => {
-    //   response.json()
-    //   console.log(response);
-    // })
-    // .then(result => {
-    //   console.log("Result", result); // Log the entire result object to see its structure
-    //   if (result && result.outputs && result.outputs.length > 0) {
-    //       const regions = result.outputs[0].data.regions;
-    //       regions.forEach(region => {
-    //           // Accessing and rounding the bounding box values
-    //           const boundingBox = region.region_info.bounding_box;
-    //           const topRow = boundingBox.top_row.toFixed(3);
-    //           const leftCol = boundingBox.left_col.toFixed(3);
-    //           const bottomRow = boundingBox.bottom_row.toFixed(3);
-    //           const rightCol = boundingBox.right_col.toFixed(3);
-  
-    //           region.data.concepts.forEach(concept => {
-    //               // Accessing and rounding the concept value
-    //               const name = concept.name;
-    //               const value = concept.value.toFixed(4);
-  
-    //               console.log(`${name}: ${value} BBox: ${topRow}, ${leftCol}, ${bottomRow}, ${rightCol}`);
-    //           });
-    //       });
-    //   } else {
-    //       console.log('Invalid response structure'); // Handle invalid response
-    //   }
-    // })
-
-
-
-    app.models.predict('face-detection', this.state.input)
+    fetch("https://api.clarifai.com/v2/models/" + MODEL_ID + "/versions/" + MODEL_VERSION_ID + "/outputs", returnClarifaiRequestOptions(this.state.input))
     .then(response => {
-      console.log('Response', response)
-      if (response) {
-        fetch('http://localhost:3000/image', {
-          method: 'put',
-          headers: {'Content-Type': 'application/json'},
-          body: JSON.stringify({
-            id: this.state.user.id
-          })
-        })
-          .then(response => response.json())
-          .then(count => {
-            this.setState(Object.assign(this.state.user, { entries: count}))
-          })
-
-      }
-      this.displayFaceBox(this.calculateFaceLocation(response))
+      response.json()
+      console.log("Response 1", response);
     })
-    .catch(error => console.log("Ooops! There was an error", error));
-  }
+    .then(response => {
+      console.log("Result", response); // Log the entire result object to see its structure
+      if (response && response.outputs && response.outputs.length > 0) {
+          const regions = response.outputs[0].data.regions;
+          regions.forEach(region => {
+              // Accessing and rounding the bounding box values
+              const boundingBox = region.region_info.bounding_box;
+              const topRow = boundingBox.top_row.toFixed(3);
+              const leftCol = boundingBox.left_col.toFixed(3);
+              const bottomRow = boundingBox.bottom_row.toFixed(3);
+              const rightCol = boundingBox.right_col.toFixed(3);
 
+              region.data.concepts.forEach(concept => {
+                  // Accessing and rounding the concept value
+                  const name = concept.name;
+                  const value = concept.value.toFixed(4);
+
+                  console.log(`${name}: ${value} BBox: ${topRow}, ${leftCol}, ${bottomRow}, ${rightCol}`);
+              });
+          });
+      } else {
+          console.log('Invalid response structure'); // Handle invalid response
+      }
+    })
+  }
 
   render() {
     return (
