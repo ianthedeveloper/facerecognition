@@ -71,12 +71,12 @@ class App extends Component {
     fetch("https://api.clarifai.com/v2/models/" + MODEL_ID + "/versions/" + MODEL_VERSION_ID + "/outputs", returnClarifaiRequestOptions(this.state.input))
     .then(response => {
       response.json()
-      console.log("Response 1", response);
+      console.log("Response", response);
     })
     .then(response => {
-      console.log("Result", response); // Log the entire result object to see its structure
-      if (response && response.outputs && response.outputs.length > 0) {
-          const regions = response.outputs[0].data.regions;
+      console.log("Result", result); // Log the entire result object to see its structure
+      if (result && result.outputs && result.outputs.length > 0) {
+          const regions = result.outputs[0].data.regions;
           regions.forEach(region => {
               // Accessing and rounding the bounding box values
               const boundingBox = region.region_info.bounding_box;
