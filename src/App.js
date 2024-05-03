@@ -73,7 +73,7 @@ class App extends Component {
       response.json()
       console.log("Response", response);
     })
-    .then(response => {
+    .then(result => {
       console.log("Result", result); // Log the entire result object to see its structure
       if (result && result.outputs && result.outputs.length > 0) {
           const regions = result.outputs[0].data.regions;
