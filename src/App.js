@@ -13,7 +13,7 @@ import Facerecognition from './components/Facerecognition/Facerecognition';
 // Latest method::
 
 const returnClarifaiRequestOptions = (imageUrl) => {
-  const PAT = '70d2b99eec204856bc2886b35b22b05d';
+  const PAT = 'Enter your PAT';
   const USER_ID = 'ianthedeveloper';
   const APP_ID = 'my-first-application';
   const IMAGE_URL = imageUrl;
