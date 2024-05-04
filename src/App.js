@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './App.css';
 import ParticlesBg from 'particles-bg';
-import Clarifai from 'clarifai';
+// import Clarifai from 'clarifai';
 import Navigation from './components/Navigation/Navigation';
 import Logo from './components/Logo/Logo';
 import Rank from './components/Rank/Rank';
