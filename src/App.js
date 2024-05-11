@@ -8,7 +8,6 @@ import Rank from './components/Rank/Rank';
 import ImageProcessingField from './components/ImageProcessingField/ImageProcessingField';
 import Facerecognition from './components/Facerecognition/Facerecognition';
 
-
 // METHOD 1
 // Latest method::
 
@@ -65,7 +64,6 @@ class App extends Component {
   onButtonSubmit = () => {
     const MODEL_ID = 'face-detection';
     const MODEL_VERSION_ID = '6dc7e46bc9124c5c8824be4822abe105';
-
     this.setState({imageUrl: this.state.input});
 
     fetch("https://api.clarifai.com/v2/models/" + MODEL_ID + "/versions/" + MODEL_VERSION_ID + "/outputs", returnClarifaiRequestOptions(this.state.input))
