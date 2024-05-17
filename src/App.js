@@ -1,15 +1,11 @@
 import React, { Component } from 'react';
 import './App.css';
 import ParticlesBg from 'particles-bg';
-// import Clarifai from 'clarifai';
 import Navigation from './components/Navigation/Navigation';
 import Logo from './components/Logo/Logo';
 import Rank from './components/Rank/Rank';
 import ImageProcessingField from './components/ImageProcessingField/ImageProcessingField';
 import Facerecognition from './components/Facerecognition/Facerecognition';
-
-// METHOD 1
-// Latest method::
 
 const returnClarifaiRequestOptions = (imageUrl) => {
   const PAT = 'Enter your PAT';
