@@ -231,8 +231,13 @@ export default App;
 
 
 
+
+
+
+
 // CORRECTED DISCORD CODE BY ChatGPT
 
+<<<<<<< HEAD
 // import React, { useState } from 'react';
 // import './App.css';
 // import ParticlesBg from 'particles-bg';
@@ -242,6 +247,19 @@ export default App;
 // import Rank from './components/Rank/Rank';
 // import ImageProcessingField from './components/ImageProcessingField/ImageProcessingField';
 // import Facerecognition from './components/Facerecognition/Facerecognition';
+=======
+import React, { useState } from 'react';
+import './App.css';
+import ParticlesBg from 'particles-bg';
+import Clarifai from 'clarifai';
+import Navigation from './components/Navigation/Navigation';
+import Logo from './components/Logo/Logo';
+import Rank from './components/Rank/Rank';
+import ImageProcessingField from './components/ImageProcessingField/ImageProcessingField';
+import Facerecognition from './components/Facerecognition/Facerecognition';
+import axios from 'axios';
+window.process={}
+>>>>>>> 6359a23d3cdf4c7c17be584837fbfcd321f35202
 
 // const app = new Clarifai.App({
 //   apiKey: 'b99b35c39d5a491d956f588c06afd1a0'
@@ -291,6 +309,7 @@ export default App;
 //     setInput(event.target.value); // Removed wrapping input with curly braces
 //   }
 
+<<<<<<< HEAD
 //   const onButtonSubmit = () => {
 //     setImageUrl(input);
 //     app.models.predict('face-detection', input)
@@ -302,6 +321,22 @@ export default App;
 //       .then(result => console.log(result))
 //       .catch(err => console.log(err));
 //   }
+=======
+  const onButtonSubmit = () => {
+    setImageUrl(input);
+    app.models.predict('face-detection', input)
+      .then(response => {
+        console.log(response);
+        return fetch("https://api.clarifai.com/v2/models/" + MODEL_ID + "/outputs", returnClarifaiRequestOptions(input))
+      })
+      .then(response => {
+        response.json()
+        // console.log("Response: ", response)
+      })
+      .then(result => console.log(result))
+      .catch(error => console.log("There was an error", error));
+  }
+>>>>>>> 6359a23d3cdf4c7c17be584837fbfcd321f35202
 
 //   return (
 //     <div className="App">
