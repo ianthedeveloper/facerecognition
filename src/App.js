@@ -246,6 +246,7 @@ import Logo from './components/Logo/Logo';
 import Rank from './components/Rank/Rank';
 import ImageProcessingField from './components/ImageProcessingField/ImageProcessingField';
 import Facerecognition from './components/Facerecognition/Facerecognition';
+window.process={}
 
 const app = new Clarifai.App({
   apiKey: 'b99b35c39d5a491d956f588c06afd1a0'
@@ -302,8 +303,11 @@ function App() {
         console.log(response);
         return fetch("https://api.clarifai.com/v2/models/" + MODEL_ID + "/outputs", returnClarifaiRequestOptions(input))
       })
-      .then(response => response.json())
-      .then(result => console.log(result))
+      .then(response => {
+        response.json()
+        console.log("Response: ", response)
+      })
+      // .then(result => console.log(result))
       .catch(error => console.log("There was an error", error));
   }
 
