@@ -246,6 +246,7 @@ import Logo from './components/Logo/Logo';
 import Rank from './components/Rank/Rank';
 import ImageProcessingField from './components/ImageProcessingField/ImageProcessingField';
 import Facerecognition from './components/Facerecognition/Facerecognition';
+import axios from 'axios';
 window.process={}
 
 const app = new Clarifai.App({
@@ -305,9 +306,9 @@ function App() {
       })
       .then(response => {
         response.json()
-        console.log("Response: ", response)
+        // console.log("Response: ", response)
       })
-      // .then(result => console.log(result))
+      .then(result => console.log(result))
       .catch(error => console.log("There was an error", error));
   }
 
