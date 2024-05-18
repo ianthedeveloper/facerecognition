@@ -237,16 +237,16 @@ export default App;
 
 // CORRECTED DISCORD CODE BY ChatGPT
 
-import React, { useState } from 'react';
-import './App.css';
-import ParticlesBg from 'particles-bg';
-import Clarifai from 'clarifai';
-import Navigation from './components/Navigation/Navigation';
-import Logo from './components/Logo/Logo';
-import Rank from './components/Rank/Rank';
-import ImageProcessingField from './components/ImageProcessingField/ImageProcessingField';
-import Facerecognition from './components/Facerecognition/Facerecognition';
-window.process={}
+// import React, { useState } from 'react';
+// import './App.css';
+// import ParticlesBg from 'particles-bg';
+// import Clarifai from 'clarifai';
+// import Navigation from './components/Navigation/Navigation';
+// import Logo from './components/Logo/Logo';
+// import Rank from './components/Rank/Rank';
+// import ImageProcessingField from './components/ImageProcessingField/ImageProcessingField';
+// import Facerecognition from './components/Facerecognition/Facerecognition';
+// window.process={}
 
 // const app = new Clarifai.App({
 //   apiKey: 'b99b35c39d5a491d956f588c06afd1a0'
