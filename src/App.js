@@ -231,6 +231,10 @@
 
 
 
+
+
+
+
 // CORRECTED DISCORD CODE BY ChatGPT
 
 import React, { useState } from 'react';
@@ -300,7 +304,7 @@ function App() {
       })
       .then(response => response.json())
       .then(result => console.log(result))
-      .catch(err => console.log(err));
+      .catch(error => console.log("There was an error", error));
   }
 
   return (
