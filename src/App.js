@@ -66,7 +66,7 @@ class App extends Component {
     fetch("https://api.clarifai.com/v2/models/" + MODEL_ID + "/versions/" + MODEL_VERSION_ID + "/outputs", returnClarifaiRequestOptions(this.state.input))
     .then(response => response.json())
     .then(result => {
-
+        console.log('Result: ', result)
         const regions = result.outputs[0].data.regions;
 
         regions.forEach(region => {
