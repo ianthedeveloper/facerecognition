@@ -9,7 +9,7 @@ import Facerecognition from './components/Facerecognition/Facerecognition';
 
 const returnClarifaiRequestOptions = (imageUrl) => {
   // Your PAT (Personal Access Token) can be found in the Account's Security section
-  const PAT = 'Enter your PAT';
+  const PAT = '70d2b99eec204856bc2886b35b22b05d';
   const USER_ID = 'ianthedeveloper';
   const APP_ID = 'my-first-application';
   const IMAGE_URL = imageUrl;
