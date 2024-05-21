@@ -182,8 +182,28 @@ class App extends Component {
     super();
     this.state = {
         input: '',
-        imageUrl: ''
+        imageUrl: '',
+        box: {},
     }
+  }
+  
+  calculateFaceLocation = (result) => {
+    const faceData = result.outputs[0].data.regions[0].region_info.bounding_box;
+    const imageInput = document.getElementById("imageInput");
+    const width = imageInput.width;
+    const height = imageInput.height;
+
+    return {
+      leftCol: faceData.left_col * width,
+      topRow: faceData.top_row * height,
+      rightCol: width - (faceData.right_col * width),
+      bottomRow: height - (faceData.bottom_row * height)
+    }
+  }
+
+  displayFaceLocation = (box) => {
+    console.log("Box:", box)
+    this.setState({box: box})
   }
 
   onInputChange = (event) => {
@@ -191,11 +211,6 @@ class App extends Component {
     this.setState({input: event.target.value});
   }
 
-  // calculateFaceBox = (result) => {
-  //   const regions = result.outputs[0].data.regions;
-  //   const faceData = document.getElementById("faceData")
-
-  // }
 
   onButtonSubmit = () => {
     const MODEL_ID = 'face-detection';
@@ -204,30 +219,7 @@ class App extends Component {
 
     fetch("https://api.clarifai.com/v2/models/" + MODEL_ID + "/versions/" + MODEL_VERSION_ID + "/outputs", returnClarifaiRequestOptions(this.state.input))
     .then(response => response.json())
-    .then(result => {
-        console.log('Result: ', result)
-        const regions = result.outputs[0].data.regions[0].region_info.bounding_box;
-        console.log("Regions: ", regions)
-
-        // regions.forEach(region => {
-        //     // Accessing and rounding the bounding box values
-        //     const boundingBox = region.region_info.bounding_box;
-        //     const topRow = boundingBox.top_row.toFixed(3);
-        //     const leftCol = boundingBox.left_col.toFixed(3);
-        //     const bottomRow = boundingBox.bottom_row.toFixed(3);
-        //     const rightCol = boundingBox.right_col.toFixed(3);
-
-        //     region.data.concepts.forEach(concept => {
-        //         // Accessing and rounding the concept value
-        //         const name = concept.name;
-        //         const value = concept.value.toFixed(4);
-
-        //         console.log(`${name}: ${value} BBox: ${topRow}, ${leftCol}, ${bottomRow}, ${rightCol}`);
-                
-        //     });
-        // });
-
-    })
+    .then(result => this.displayFaceLocation(this.calculateFaceLocation(result)))
     .catch(error => console.log('Ooops! There was an error', error));
   }
 
@@ -241,7 +233,7 @@ class App extends Component {
         <ImageProcessingField 
           onInputChange={this.onInputChange} onButtonSubmit={this.onButtonSubmit}  
         />
-        <Facerecognition imageUrl={this.state.imageUrl}  />
+        <Facerecognition box={this.state.box} imageUrl={this.state.imageUrl} />
       </div>
     );
   }
