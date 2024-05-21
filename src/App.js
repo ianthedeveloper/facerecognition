@@ -49,14 +49,35 @@
 //     super();
 //     this.state = {
 //         input: '',
-//         imageUrl: ''
+//         imageUrl: '',
+//         box: {},
 //     }
+//   }
+  
+//   calculateFaceLocation = (result) => {
+//     const faceData = result.outputs[0].data.regions[0].region_info.bounding_box;
+//     const imageInput = document.getElementById("imageInput");
+//     const width = (imageInput.width);
+//     const height = (imageInput.height);
+
+//     return {
+//       leftCol: faceData.left_col * width,
+//       topRow: faceData.top_row * height,
+//       rightCol: width - (faceData.right_col * width),
+//       bottomRow: height - (faceData.bottom_row * height)
+//     }
+//   }
+
+//   displayFaceLocation = (box) => {
+//     console.log("Box:", box)
+//     this.setState({box: box})
 //   }
 
 //   onInputChange = (event) => {
 //     // console.log("Input:", event.target.value);
 //     this.setState({input: event.target.value});
 //   }
+
 
 //   onButtonSubmit = () => {
 //     const MODEL_ID = 'face-detection';
@@ -65,30 +86,7 @@
 
 //     fetch("https://api.clarifai.com/v2/models/" + MODEL_ID + "/versions/" + MODEL_VERSION_ID + "/outputs", returnClarifaiRequestOptions(this.state.input))
 //     .then(response => response.json())
-//     .then(result => {
-//         console.log('Result: ', result)
-//         const regions = result.outputs[0].data.regions;
-//         console.log("Regions: ", regions)
-
-//         regions.forEach(region => {
-//             // Accessing and rounding the bounding box values
-//             const boundingBox = region.region_info.bounding_box;
-//             const topRow = boundingBox.top_row.toFixed(3);
-//             const leftCol = boundingBox.left_col.toFixed(3);
-//             const bottomRow = boundingBox.bottom_row.toFixed(3);
-//             const rightCol = boundingBox.right_col.toFixed(3);
-
-//             region.data.concepts.forEach(concept => {
-//                 // Accessing and rounding the concept value
-//                 const name = concept.name;
-//                 const value = concept.value.toFixed(4);
-
-//                 console.log(`${name}: ${value} BBox: ${topRow}, ${leftCol}, ${bottomRow}, ${rightCol}`);
-                
-//             });
-//         });
-
-//     })
+//     .then(result => this.displayFaceLocation(this.calculateFaceLocation(result)))
 //     .catch(error => console.log('Ooops! There was an error', error));
 //   }
 
@@ -102,7 +100,7 @@
 //         <ImageProcessingField 
 //           onInputChange={this.onInputChange} onButtonSubmit={this.onButtonSubmit}  
 //         />
-//         <Facerecognition imageUrl={this.state.imageUrl}  />
+//         <Facerecognition box={this.state.box} imageUrl={this.state.imageUrl} />
 //       </div>
 //     );
 //   }
@@ -124,14 +122,9 @@
 
 
 
+//MY PLAYGROUND
 
-
-
-
-
-// MY PLAYGROUND
-
-import React, { Component } from 'react';
+import React, { useState } from 'react';
 import './App.css';
 import ParticlesBg from 'particles-bg';
 import Navigation from './components/Navigation/Navigation';
@@ -165,33 +158,26 @@ const returnClarifaiRequestOptions = (imageUrl) => {
   });
 
   const requestOptions = {
-  method: 'POST',
-  headers: {
-        'Accept': 'application/json',
-        'Authorization': 'Key ' + PAT
+    method: 'POST',
+    headers: {
+      'Accept': 'application/json',
+      'Authorization': 'Key ' + PAT
     },
     body: raw
   };
 
   return requestOptions;
-
 }
 
-class App extends Component {
-  constructor(){
-    super();
-    this.state = {
-        input: '',
-        imageUrl: '',
-        box: {},
-    }
-  }
-  
-  calculateFaceLocation = (result) => {
+const App = () => {
+  const [input, setInput] = useState('');
+  const [imageUrl, setImageUrl] = useState('');
+  const [box, setBox] = useState({});
+
+  const calculateFaceLocation = (result) => {
     const faceData = result.outputs[0].data.regions[0].region_info.bounding_box;
-    const imageInput = document.getElementById("imageInput");
-    const width = imageInput.width;
-    const height = imageInput.height;
+    const width = 500;
+    const height = 500; 
 
     return {
       leftCol: faceData.left_col * width,
@@ -201,46 +187,38 @@ class App extends Component {
     }
   }
 
-  displayFaceLocation = (box) => {
+  const displayFaceLocation = (box) => {
     console.log("Box:", box)
-    this.setState({box: box})
+    setBox(box);
   }
 
-  onInputChange = (event) => {
-    // console.log("Input:", event.target.value);
-    this.setState({input: event.target.value});
+  const onInputChange = (event) => {
+    setInput(event.target.value);
   }
 
-
-  onButtonSubmit = () => {
+  const onButtonSubmit = () => {
     const MODEL_ID = 'face-detection';
     const MODEL_VERSION_ID = '6dc7e46bc9124c5c8824be4822abe105';
-    this.setState({imageUrl: this.state.input});
+    setImageUrl(input);
 
-    fetch("https://api.clarifai.com/v2/models/" + MODEL_ID + "/versions/" + MODEL_VERSION_ID + "/outputs", returnClarifaiRequestOptions(this.state.input))
+    fetch("https://api.clarifai.com/v2/models/" + MODEL_ID + "/versions/" + MODEL_VERSION_ID + "/outputs", returnClarifaiRequestOptions(input))
     .then(response => response.json())
-    .then(result => this.displayFaceLocation(this.calculateFaceLocation(result)))
+    .then(result => displayFaceLocation(calculateFaceLocation(result)))
     .catch(error => console.log('Ooops! There was an error', error));
   }
 
-  render() {
-    return (
-      <div className="App">
-        <ParticlesBg className="particlesBg" num={331} type="fountain" bg={true} />
-        <Navigation/>
-        <Logo/>
-        <Rank/>
-        <ImageProcessingField 
-          onInputChange={this.onInputChange} onButtonSubmit={this.onButtonSubmit}  
-        />
-        <Facerecognition box={this.state.box} imageUrl={this.state.imageUrl} />
-      </div>
-    );
-  }
+  return (
+    <div className="App">
+      <ParticlesBg className="particlesBg" num={331} type="fountain" bg={true} />
+      <Navigation/>
+      <Logo/>
+      <Rank/>
+      <ImageProcessingField 
+        onInputChange={onInputChange} onButtonSubmit={onButtonSubmit}  
+      />
+      <Facerecognition box={box} imageUrl={imageUrl} />
+    </div>
+  );
 }
 
 export default App;
-
-
-
-
