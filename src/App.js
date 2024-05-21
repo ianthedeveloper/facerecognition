@@ -187,8 +187,8 @@ class App extends Component {
     }
   }
   
-  calculateFaceLocation = (result) => {
-    const faceData = result.outputs[0].data.regions[0].region_info.bounding_box;
+  calculateFaceLocation = (data) => {
+    const faceData = data.outputs[0].data.regions[0].region_info.bounding_box;
     const imageInput = document.getElementById("imageInput");
     const width = imageInput.width;
     const height = imageInput.height;
