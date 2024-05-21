@@ -68,6 +68,7 @@ class App extends Component {
     .then(result => {
         console.log('Result: ', result)
         const regions = result.outputs[0].data.regions;
+        console.log("Regions: ", regions)
 
         regions.forEach(region => {
             // Accessing and rounding the bounding box values
