@@ -6,7 +6,7 @@ const imageProcessingField = (props) => {
 
     return (
         <div>
-            <p className="textPrompt f4">{"Magic: Paste your image link for me to detect faces on it "}  </p>
+            <p className="textPrompt f4">{"Submit your image link for me to detect the faces on it. Just give me a try"}  </p>
             <div className="inputField center br3 shadow-5" >
                 <div className="center pa4">
                     <input 
