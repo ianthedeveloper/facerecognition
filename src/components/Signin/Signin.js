@@ -1,8 +1,9 @@
 import React from 'react';
+import './signin.css';
 
 const Signin = () => {
     return(
-        <div className='center ba br3 dark-gray w--white-10 w-100 w-50-m w-25-l shadow-5'>
+        <div className='container ba br3 dark-gray w--white-10 w-100 w-50-m w-25-l shadow-5 center flex justify-center mt10'>
             <main className="pa4 black -80">
                 <form className="measure">
                   <fieldset id="sign_up" className="ba b--transparent ph0 mh0">
