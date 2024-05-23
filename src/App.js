@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import './App.css';
 import ParticlesBg from 'particles-bg';
 import Navigation from './components/Navigation/Navigation';
+import Signin from './components/Signin/Signin';
 import Logo from './components/Logo/Logo';
 import Rank from './components/Rank/Rank';
 import ImageProcessingField from './components/ImageProcessingField/ImageProcessingField';
@@ -95,6 +96,7 @@ class App extends Component {
       <div className="App">
         <ParticlesBg className="particlesBg" num={331} type="fountain" bg={true} />
         <Navigation/>
+        <Signin/>
         <Logo/>
         <Rank/>
         <ImageProcessingField 
