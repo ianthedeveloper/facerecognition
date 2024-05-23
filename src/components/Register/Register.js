@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Signin = ({onRouteChange}) => {
+const Register = ({onRouteChange}) => {
     return(
         <div className='container ba br3 dark-gray w--white-10 w-100 w-50-m w-25-l mw6 shadow-5 center'>
             <div className="pa4 black -80">
