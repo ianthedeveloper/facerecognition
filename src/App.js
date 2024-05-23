@@ -52,7 +52,7 @@ class App extends Component {
         input: '',
         imageUrl: '',
         box: {},
-        route: '',
+        route: 'signin',
     }
   }
   
@@ -102,9 +102,9 @@ class App extends Component {
       <div className="App">
         <ParticlesBg className="particlesBg" num={331} type="fountain" bg={true} />
         { this.state.route === 'signin' ?
-          <Signin/> : 
+          <Signin onRouteChange={this.onRouteChange}/> : 
           <div>
-            <Navigation/>
+            <Navigation onRouteChange={this.onRouteChange}/>
             <Logo/>
             <Rank/>
             <ImageProcessingField 
