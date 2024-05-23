@@ -3,6 +3,7 @@ import './App.css';
 import ParticlesBg from 'particles-bg';
 import Navigation from './components/Navigation/Navigation';
 import Signin from './components/Signin/Signin';
+import Register from './components/Register/Register';
 import Logo from './components/Logo/Logo';
 import Rank from './components/Rank/Rank';
 import ImageProcessingField from './components/ImageProcessingField/ImageProcessingField';
@@ -101,17 +102,21 @@ class App extends Component {
     return (
       <div className="App">
         <ParticlesBg className="particlesBg" num={331} type="fountain" bg={true} />
-        { this.state.route === 'signin' ?
-          <Signin onRouteChange={this.onRouteChange}/> : 
+        <Navigation onRouteChange={this.onRouteChange}/>
+        { this.state.route === 'home' ?
           <div>
-            <Navigation onRouteChange={this.onRouteChange}/>
             <Logo/>
             <Rank/>
             <ImageProcessingField 
               onInputChange={this.onInputChange} onButtonSubmit={this.onButtonSubmit}  
             />
             <Facerecognition box={this.state.box} imageUrl={this.state.imageUrl} />
-          </div>
+          </div>:
+            (
+              this.state.route === 'signin' ?
+              <Signin onRouteChange={this.onRouteChange}/> : 
+              <Register onRouteChange={this.onRouteChange}/>
+            )
         }
       </div>
     );
