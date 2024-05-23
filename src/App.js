@@ -63,6 +63,7 @@ class App extends Component {
     const imageInput = document.getElementById("imageInput");
     const width = Number(imageInput.width);
     const height = Number(imageInput.height);
+    console.log("Results:", result);
 
     return {
       leftCol: faceData.left_col * width,
@@ -90,7 +91,7 @@ class App extends Component {
 
     fetch("https://api.clarifai.com/v2/models/" + MODEL_ID + "/versions/" + MODEL_VERSION_ID + "/outputs", returnClarifaiRequestOptions(this.state.input))
     .then(response => response.json())
-    .then(result => this.displayFaceLocation(this.calculateFaceLocation(result)))
+    .then(result =>  this.displayFaceLocation(this.calculateFaceLocation(result)))
     .catch(error => console.log('Ooops! There was an error', error));
   }
 
