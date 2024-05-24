@@ -61,7 +61,7 @@ class App extends Component {
   calculateFaceLocation = (result) => {
     const faceData = result.outputs[0].data.regions[0].region_info.bounding_box;
     const imageInput = document.getElementById("imageInput");
-    const width = Number(imageInput.width);
+    const width = imageInput.width;
     const height = Number(imageInput.height);
     console.log("Results:", result);
 
