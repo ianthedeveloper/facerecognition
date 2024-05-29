@@ -1,22 +1,24 @@
-import React from 'react';
-import './facerecognition.css';
+// import React from 'react';
+// import './facerecognition.css';
 
-const Facerecognition = (props) => {
-    const {imageUrl, box} = props;
+// const Facerecognition = (props) => {
+//     const {imageUrl, box} = props;
 
-    return (
-        <div className='center mt3 relative'>
-            <div>
-                <img id='imageInput' src={imageUrl} alt='' style={{width: '500px', height: 'auto'}} />
-            </div>  
-            <div className='bounding-box' style={{top:box.topRow, left: box.leftCol, right: box.rightCol, bottom: box.bottomRow}}></div>
-        </div>
-    )
-}
+//     return (
+//         <div className='center mt3 relative'>
+//             <div>
+//                 <img id='imageInput' src={imageUrl} alt='' style={{width: '500px', height: 'auto'}} />
+//             </div>  
+//             <div className='bounding-box' style={{top:box.topRow, left: box.leftCol, right: box.rightCol, bottom: box.bottomRow}}></div>
+//         </div>
+//     )
+// }
 
-export default Facerecognition;
+// export default Facerecognition;
 
 
+
+// 1:: Sample 1 From chatGPT
 
 // import React from 'react';
 // import './facerecognition.css';
@@ -42,3 +44,32 @@ export default Facerecognition;
 // }
 
 // export default Facerecognition;
+
+
+
+
+
+// 2:: Sample 2 From chatGPT
+
+import React from 'react';
+import './facerecognition.css';
+
+const Facerecognition = (props) => {
+    const {imageUrl, box} = props;
+
+    return (
+        <div className='center mt3 relative'>
+            <div>
+                <img id='imageInput' src={imageUrl} alt='' style={{width: '500px', height: 'auto'}}/>
+            </div>  
+            <div className='bounding-box' style={{
+                top: box.topRow, 
+                left: box.leftCol, 
+                width: box.rightCol - box.leftCol, 
+                height: box.bottomRow - box.topRow
+            }}></div>
+        </div>
+    )
+}
+
+export default Facerecognition;
