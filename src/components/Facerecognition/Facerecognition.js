@@ -65,8 +65,8 @@ const Facerecognition = (props) => {
             <div className='bounding-box' style={{
                 top: box.topRow, 
                 left: box.leftCol, 
-                width: box.rightCol - box.leftCol, 
-                height: box.bottomRow - box.topRow
+                width: box.rightCol, 
+                height: box.bottomRow 
             }}></div>
         </div>
     )
