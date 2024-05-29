@@ -61,15 +61,19 @@ class App extends Component {
   calculateFaceLocation = (result) => {
     const faceData = result.outputs[0].data.regions[0].region_info.bounding_box;
     const imageInput = document.getElementById("imageInput");
-    const width = imageInput.width;
+    const width = Number(imageInput.width);
     const height = Number(imageInput.height);
     console.log("Results:", result);
 
     return {
       leftCol: faceData.left_col * width,
       topRow: faceData.top_row * height,
-      rightCol: width - (faceData.right_col * width),
-      bottomRow: height - (faceData.bottom_row * height)
+
+      // rightCol: width - (faceData.right_col * width),
+      rightCol: (1 - faceData.right_col) * width,
+
+      // bottomRow: height - (faceData.bottom_row * height),
+      bottomRow: (1 - faceData.bottom_row) * height,
     }
   }
 
@@ -108,7 +112,7 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <ParticlesBg className="particlesBg" num={331} type="fountain" bg={true} />
+        <ParticlesBg className="particlesBg" num={183} type="fountain" bg={true} />
         <Navigation onRouteChange={this.onRouteChange} isUserSignedin={this.state.isUserSignedin}/>
         { this.state.route === 'home' ?
           <div>
@@ -131,6 +135,25 @@ class App extends Component {
 }
 
 export default App;
+
+
+
+// FaceBox Calculations
+
+// const top = box.top_row * height
+// const left = box.left_col * width
+// const boxWidth = (box.right_col - box.left_col) * width
+// const boxHeight = (box.bottom_row - box.top_row) * height
+
+
+
+
+// My Own Version Of FaceBox Calculations:
+
+// topRow: faceData.top_row * height;
+// bottomRow: height - (faceData.bottom_row * height);
+ 
+
 
 
 
