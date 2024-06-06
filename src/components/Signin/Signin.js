@@ -1,7 +1,30 @@
 import React from 'react';
 import './signin.css';
 
-const Signin = ({onRouteChange}) => {
+class Signin extends React.Component{
+  constructor(props){
+    super(props);
+    this.state = {
+      signinEmail: '',
+      signinPassword: ''
+    }
+  }
+
+  onEmailChange = (event) => {
+    this.setState({signinEmail: event.target.value});
+  }
+
+  onPasswordChange = (event) => {
+    this.setState({signinPassword: event.target.value});
+  }
+
+  onSignIn = () => {
+    console.log(this.state);
+  }
+
+
+  render(){
+    const { onRouteChange } = this.props;
     return(
         <div className='container ba br3 dark-gray w--white-10 w-100 w-50-m w-25-l mw6 shadow-5 center'>
             <div className="pa4 black -80">
@@ -10,11 +33,23 @@ const Signin = ({onRouteChange}) => {
                     <legend className="f1 fw6 ph0 mh0 center">Sign In</legend>
                     <div className="mt3">
                       <label className="db fw6 lh-copy f5" htmlFor='email'>Email</label>
-                      <input className="pa2 input-reset ba bg-transparent hover-bg-black hover-white w-100" type="email" name="email-address"  id="email-address"/>
+                      <input 
+                      className="pa2 input-reset ba bg-transparent hover-bg-black hover-white w-100" 
+                      type="email" 
+                      name="email-address"  
+                      id="email-address"
+                      onChange={this.onEmailChange}
+                      />
                     </div>
                     <div className="mv3">
                       <label className="db fw6 lh-copy f5" htmlFor='password'>Password</label>
-                      <input className="b pa2 input-reset ba bg-transparent hover-bg-black hover-white w-100" type="password" name="password"  id="password"/>
+                      <input 
+                      className="b pa2 input-reset ba bg-transparent hover-bg-black hover-white w-100" 
+                      type="password" 
+                      name="password"  
+                      id="password"
+                      onChange={this.onPasswordChange}
+                      />
                     </div>
                     {/* <label class="pa0 ma0 lh-copy f6 pointer"><input type="checkbox"/> Remember me</label> */}
                   </div>
@@ -33,6 +68,8 @@ const Signin = ({onRouteChange}) => {
             </div>
         </div>
     )
+  }
 }
+
 
 export default Signin;

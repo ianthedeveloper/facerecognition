@@ -58,12 +58,6 @@ class App extends Component {
     }
   }
 
-  componentDidMount(){
-    fetch("http://localhost:3003/")
-    .then(response => response.json())
-    .then(console.log)
-  }
-  
   calculateFaceLocation = (result) => {
     const faceData = result.outputs[0].data.regions[0].region_info.bounding_box;
     const imageInput = document.getElementById("imageInput");
