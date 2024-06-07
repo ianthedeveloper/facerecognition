@@ -8,6 +8,7 @@ import Logo from './components/Logo/Logo';
 import Rank from './components/Rank/Rank';
 import ImageProcessingField from './components/ImageProcessingField/ImageProcessingField';
 import Facerecognition from './components/Facerecognition/Facerecognition';
+import { jsx } from 'react/jsx-runtime';
 
 const returnClarifaiRequestOptions = (imageUrl) => {
   // Your PAT (Personal Access Token) can be found in the Account's Security section
@@ -54,8 +55,25 @@ class App extends Component {
         imageUrl: '',
         box: {},
         route: 'signin',
-        isUserSignedin: false
+        isUserSignedin: false,
+        user: {
+          id: '',
+          name: '',
+          email: '',
+          entries: 0,
+          joined: ''
+        }
     }
+  }
+
+  postUser = (data) => {
+    this.setState({user:{
+      id: data.id,
+      name: data.name,
+      email: data.email,
+      entries: 0,
+      joined: data.joined
+    }})
   }
 
   calculateFaceLocation = (result) => {
@@ -126,7 +144,7 @@ class App extends Component {
             (
               this.state.route === 'signin' ?
               <Signin onRouteChange={this.onRouteChange}/> : 
-              <Register onRouteChange={this.onRouteChange}/>
+              <Register onRouteChange={this.onRouteChange} postUser={this.postUser}/>
             )
         }
       </div>
