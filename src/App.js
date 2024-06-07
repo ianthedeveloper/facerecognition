@@ -71,7 +71,7 @@ class App extends Component {
       id: data.id,
       name: data.name,
       email: data.email,
-      entries: 0,
+      entries: data.entries,
       joined: data.joined
     }})
   }
@@ -105,15 +105,30 @@ class App extends Component {
     this.setState({input: event.target.value});
   }
 
-
   onButtonSubmit = () => {
     const MODEL_ID = 'face-detection';
     const MODEL_VERSION_ID = '6dc7e46bc9124c5c8824be4822abe105';
     this.setState({imageUrl: this.state.input});
 
     fetch("https://api.clarifai.com/v2/models/" + MODEL_ID + "/versions/" + MODEL_VERSION_ID + "/outputs", returnClarifaiRequestOptions(this.state.input))
-    .then(response => response.json())
-    .then(result =>  this.displayFaceLocation(this.calculateFaceLocation(result)))
+    .then(response => {
+      if(response){
+        fetch('http://localhost:3003/image', {
+          method: 'PUT',
+          headers: {'Content-Type': 'application/json'},
+          body: JSON.stringify({
+            id: this.state.user.id
+          })
+        })
+        .then(response => response.json())
+        .then(count => {
+          this.setState(Object.assign(this.state.user, {entries: count}))
+        })
+      }
+    })
+    .then(result =>  {
+      this.displayFaceLocation(this.calculateFaceLocation(result))
+    })
     .catch(error => console.log('Ooops! There was an error', error));
   }
 
@@ -135,7 +150,7 @@ class App extends Component {
         { this.state.route === 'home' ?
           <div>
             <Logo/>
-            <Rank/>
+            <Rank name={this.state.user.name} entries={this.state.user.entries}/>
             <ImageProcessingField 
               onInputChange={this.onInputChange} onButtonSubmit={this.onButtonSubmit}  
             />
