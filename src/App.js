@@ -124,10 +124,14 @@ class App extends Component {
         .then(count => {
           this.setState(Object.assign(this.state.user, {entries: count}))
         })
+        // .then(response =>  {
+        //   this.displayFaceLocation(this.calculateFaceLocation(response))
+        // })
+        // .catch(error => console.log('Ooops! There was an error', error));
       }
     })
-    .then(result =>  {
-      this.displayFaceLocation(this.calculateFaceLocation(result))
+    .then(response =>  {
+      this.displayFaceLocation(this.calculateFaceLocation(response))
     })
     .catch(error => console.log('Ooops! There was an error', error));
   }
