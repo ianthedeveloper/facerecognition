@@ -18,9 +18,21 @@ class Signin extends React.Component{
     this.setState({signinPassword: event.target.value});
   }
 
-  onSignin = () => {
-    console.log(this.state);
-    this.props.onRouteChange('home');
+  onSignin = () => {    
+    fetch("http://localhost:3003/signin", {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({
+        email: this.state.signinEmail,
+        password: this.state.signinPassword
+      })
+    })
+    .then(response => response.json())
+    .then(data => {
+      if(data === 'Success'){
+        this.props.onRouteChange('home');
+      }
+    })
   }
 
 
@@ -59,7 +71,7 @@ class Signin extends React.Component{
                         className="b ph3 pv2 input-reset ba b--black bg-transparent grow pointer f5 dib" 
                         type="submit" 
                         value="Sign in"
-                        onClick={onSignin}
+                        onClick={this.onSignin}
                     />
                   </div>
                   <div className="lh-copy mt3">
