@@ -18,8 +18,9 @@ class Signin extends React.Component{
     this.setState({signinPassword: event.target.value});
   }
 
-  onSignIn = () => {
+  onSignin = () => {
     console.log(this.state);
+    this.props.onRouteChange('home');
   }
 
 
@@ -54,10 +55,11 @@ class Signin extends React.Component{
                     {/* <label class="pa0 ma0 lh-copy f6 pointer"><input type="checkbox"/> Remember me</label> */}
                   </div>
                   <div className="">
-                    <input className="b ph3 pv2 input-reset ba b--black bg-transparent grow pointer f5 dib" 
+                    <input 
+                        className="b ph3 pv2 input-reset ba b--black bg-transparent grow pointer f5 dib" 
                         type="submit" 
                         value="Sign in"
-                        onClick={() => onRouteChange('home')}
+                        onClick={onSignin}
                     />
                   </div>
                   <div className="lh-copy mt3">
